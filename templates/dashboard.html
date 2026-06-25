@@ -220,21 +220,44 @@ async function loadEventsChart() {
     }
 
     joinsChart = new Chart(ctx, {
-        type: "bar",
+        type: "line",
         data: {
             labels: labels,
             datasets: [{
                 label: "New Devices Seen",
-                data: counts
+                data: counts,
+                tension: 0.25,
+                fill: false,
+                pointRadius: 4,
+                pointHoverRadius: 6
             }]
         },
         options: {
             responsive: true,
+            interaction: {
+                mode: "index",
+                intersect: false
+            },
+            plugins: {
+                tooltip: {
+                    enabled: true
+                }
+            },
             scales: {
                 y: {
                     beginAtZero: true,
                     ticks: {
                         precision: 0
+                    },
+                    title: {
+                        display: true,
+                        text: "New Devices"
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: "Time"
                     }
                 }
             }
